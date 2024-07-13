@@ -121,14 +121,25 @@ func JoinVertical(pos Position, strs ...string) string {
 		return strs[0]
 	}
 
+	filtered := make([]string, len(strs))
+	for _, s := range strs {
+		if s != "" {
+			filtered = append(filtered, s)
+		}
+	}
+
 	var (
-		blocks   = make([][]string, len(strs))
+		blocks   = make([][]string, len(filtered))
 		maxWidth int
 	)
 
-	for i := range strs {
+	for i, s := range filtered {
+		if s == "" {
+			continue
+		}
+
 		var w int
-		blocks[i], w = getLines(strs[i])
+		blocks[i], w = getLines(s)
 		if w > maxWidth {
 			maxWidth = w
 		}
