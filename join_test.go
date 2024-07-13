@@ -12,6 +12,9 @@ func TestJoinVertical(t *testing.T) {
 		{"pos0", JoinVertical(0, "A", "BBBB"), "A   \nBBBB"},
 		{"pos1", JoinVertical(1, "A", "BBBB"), "   A\nBBBB"},
 		{"pos0.25", JoinVertical(0.25, "A", "BBBB"), " A  \nBBBB"},
+		{"firstEmpty", JoinVertical(0, "", "FOO"), "FOO"},
+		{"secondEmpty", JoinVertical(0, "FOO", ""), "FOO"},
+		{"allEmpty", JoinVertical(0, "", ""), ""},
 	}
 
 	for _, test := range tests {
